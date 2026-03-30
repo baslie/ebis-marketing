@@ -1,0 +1,23 @@
+---
+import logo from "../assets/ebis-logo.svg";
+import { site } from "../data/site";
+---
+
+<header class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+    <a href="/">
+      <img src={logo.src} alt="ЭБИС" class="h-9 w-auto" />
+    </a>
+    <div class="flex items-center gap-4">
+      <span class="hidden lg:block text-xs text-text-secondary text-right leading-snug">
+        ул.&nbsp;Калининградская,&nbsp;2Е, Большое&nbsp;Исаково,<br />Калининградская&nbsp;обл.
+      </span>
+      <a
+        href={site.contact.phoneHref}
+        class="border border-text-primary rounded-btn text-text-primary text-xs font-medium px-4 py-1.5 hover:border-primary hover:text-primary transition-colors duration-300"
+      >
+        {site.contact.phone}
+      </a>
+    </div>
+  </div>
+</header>

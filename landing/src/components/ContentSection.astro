@@ -1,0 +1,59 @@
+<section class="py-4 md:py-6">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+    <!-- Video placeholder -->
+    <div class="aspect-video bg-gray-200 rounded-lg flex items-center justify-center flex-col gap-4">
+      <svg
+        class="w-16 h-16 text-text-muted"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none" />
+      </svg>
+      <span class="text-text-muted text-sm">Видео о компании</span>
+    </div>
+
+    <!-- Lead form card -->
+    <div class="border border-gray-300 rounded-lg p-6">
+      <h2 class="text-xl md:text-2xl font-bold text-text-primary mb-1">
+        Оставьте заявку
+      </h2>
+      <p class="text-sm text-text-secondary mb-3">
+        Мы свяжемся с&nbsp;вами и&nbsp;поможем подобрать оптимальное решение для вашей кровли.
+      </p>
+      <form action="#" method="POST" class="space-y-3">
+        <input
+          type="text"
+          name="name"
+          placeholder="Имя"
+          aria-label="Имя"
+          required
+          class="form-field h-[44px]"
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Телефон"
+          aria-label="Телефон"
+          required
+          class="form-field h-[44px]"
+        />
+        <textarea
+          name="comment"
+          placeholder="Комментарий"
+          aria-label="Комментарий"
+          rows="2"
+          class="form-field min-h-[80px] py-3 resize-y"
+        ></textarea>
+        <button
+          type="submit"
+          class="w-full h-[44px] bg-primary text-white font-semibold text-base rounded-btn-lg hover:bg-primary-hover transition-colors duration-300 cursor-pointer"
+        >
+          Оставить заявку
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

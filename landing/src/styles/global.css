@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", Arial, sans-serif;
+
+  --color-primary: #F36000;
+  --color-primary-hover: #E55A1F;
+  --color-primary-light: #F36F2E;
+  --color-primary-bg: #FFF0E2;
+
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #616161;
+  --color-text-muted: #9E9E9E;
+
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #EEEEEE;
+  --color-gray-300: #E0E0E0;
+  --color-gray-400: #D4D4D4;
+
+  --radius-btn: 30px;
+  --radius-btn-lg: 50px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.form-field {
+  @apply w-full px-4 bg-white border border-gray-300 rounded-md text-base font-light
+    focus:outline-none focus:border-primary transition-colors;
+}
