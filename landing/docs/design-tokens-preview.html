@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EBIS Design Tokens — Visual Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&subset=latin,cyrillic" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #F36F2E;
+      --primary-cta: #F36000;
+      --primary-hover: #E55A1F;
+      --secondary-color: #FFF0E2;
+      --text-primary: #1A1A1A;
+      --text-secondary: #616161;
+      --text-muted: #9E9E9E;
+      --white: #FFFFFF;
+      --gray-100: #F5F5F5;
+      --gray-200: #EEEEEE;
+      --gray-300: #E0E0E0;
+      --gray-400: #D4D4D4;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-btn: 30px;
+      --radius-btn-lg: 50px;
+      --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--text-primary);
+      background: var(--white);
+      line-height: 1.5;
+    }
+
+    /* ── Layout ── */
+    .page-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-300);
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .page-header .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .page-header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .page-header .badge {
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--secondary-color);
+      color: var(--primary-color);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    section:last-child { border-bottom: none; }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      line-height: 1.2;
+    }
+
+    /* ── 1. Colors ── */
+    .color-group { margin-bottom: 40px; }
+    .color-group-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .color-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: box-shadow 0.3s ease;
+    }
+    .color-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .color-swatch {
+      height: 100px;
+      position: relative;
+    }
+    .color-swatch.bordered {
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .color-info {
+      padding: 12px 16px;
+    }
+    .color-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .color-value {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+    }
+    .color-desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ── 2. Typography ── */
+    .type-specimen {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .type-specimen:last-child { border-bottom: none; }
+    .type-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .type-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: var(--gray-100);
+      color: var(--text-secondary);
+      font-family: 'Courier New', monospace;
+    }
+    .type-sample {
+      margin-top: 8px;
+    }
+
+    /* Weight scale */
+    .weight-scale {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .weight-item {
+      text-align: center;
+    }
+    .weight-demo {
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .weight-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+    }
+    .weight-name {
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* Font size scale */
+    .size-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .size-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+    }
+    .size-label {
+      width: 120px;
+      flex-shrink: 0;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      color: var(--text-muted);
+      text-align: right;
+    }
+    .size-demo {
+      line-height: 1.2;
+    }
+
+    /* ── 3. Spacing ── */
+    .spacing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .spacing-label {
+      width: 140px;
+      flex-shrink: 0;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+      color: var(--text-muted);
+      text-align: right;
+    }
+    .spacing-bar {
+      height: 32px;
+      background: var(--primary-color);
+      border-radius: 4px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      position: relative;
+    }
+    .spacing-bar:hover { opacity: 1; }
+    .spacing-px {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ── 4. Border Radius ── */
+    .radius-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+    }
+    .radius-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .radius-demo {
+      width: 120px;
+      height: 120px;
+      background: var(--secondary-color);
+      border: 2px solid var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+    .radius-demo:hover {
+      background: var(--primary-color);
+    }
+    .radius-demo:hover .radius-val {
+      color: var(--white);
+    }
+    .radius-val {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-color);
+      transition: color 0.3s ease;
+    }
+    .radius-name {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .radius-token {
+      font-size: 11px;
+      font-family: 'Courier New', monospace;
+      color: var(--text-muted);
+    }
+
+    /* ── 5. Shadows ── */
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .shadow-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.3s ease;
+    }
+    .shadow-card:hover { transform: translateY(-2px); }
+    .shadow-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .shadow-value {
+      font-size: 11px;
+      font-family: 'Courier New', monospace;
+      color: var(--text-muted);
+      text-align: center;
+      word-break: break-all;
+    }
+
+    /* ── 6. Buttons ── */
+    .buttons-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', Arial, sans-serif;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--primary-cta);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: var(--radius-btn);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+    .btn-primary-lg {
+      background: var(--primary-cta);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 18px 48px;
+      border-radius: var(--radius-btn-lg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .btn-primary-lg:hover {
+      background: var(--primary-hover);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-cta);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: var(--radius-btn);
+      border: 2px solid var(--primary-cta);
+    }
+    .btn-outline:hover {
+      background: var(--primary-cta);
+      color: var(--white);
+    }
+    .btn-phone {
+      background: var(--primary-cta);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: var(--radius-btn);
+    }
+    .btn-phone:hover {
+      background: var(--primary-hover);
+    }
+    .btn-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ── 7. Form Elements ── */
+    .form-showcase {
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .form-group { position: relative; }
+    .form-label {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .form-input {
+      width: 100%;
+      height: 60px;
+      border: 1px solid #000;
+      border-radius: 0;
+      padding: 0 20px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-primary);
+      background: transparent;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .form-input:focus {
+      border-color: var(--primary-cta);
+    }
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+    .form-input-underline {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-bottom: 1px solid var(--gray-300);
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-primary);
+      background: transparent;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .form-input-underline:focus {
+      border-bottom-color: var(--primary-cta);
+    }
+    .form-input-underline::placeholder {
+      color: var(--text-muted);
+    }
+    .form-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: -16px;
+    }
+
+    /* ── 8. Cards & Components ── */
+    .components-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .component-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .component-preview {
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+      overflow: hidden;
+    }
+    .component-info {
+      padding: 16px 24px;
+      background: var(--gray-100);
+      border-top: 1px solid var(--gray-200);
+    }
+    .component-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .component-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Nav demo */
+    .nav-demo {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: var(--white);
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-200);
+      width: 100%;
+      white-space: nowrap;
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-color);
+      flex-shrink: 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex: 1;
+      min-width: 0;
+    }
+    .nav-link {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover { color: var(--primary-color); }
+
+    /* Stat demo */
+    .stats-row {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+    }
+    .stat-demo { text-align: center; }
+    .stat-number {
+      font-size: 42px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--primary-color);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      margin-top: 8px;
+    }
+
+    /* Contact bar demo */
+    .contact-bar-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+    }
+    .contact-card {
+      background: var(--gray-100);
+      border-radius: var(--radius-md);
+      padding: 16px 12px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .contact-card.accent {
+      background: var(--primary-cta);
+      color: var(--white);
+    }
+    .contact-icon {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    /* FAQ demo */
+    .faq-demo { width: 100%; }
+    .faq-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-300);
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .faq-item:hover { color: var(--primary-color); }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 300;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+
+    /* Table demo */
+    .table-demo {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .table-demo th {
+      text-align: left;
+      font-weight: 700;
+      padding: 10px 16px;
+      font-size: 12px;
+    }
+    .table-demo td {
+      padding: 10px 16px;
+      font-weight: 400;
+    }
+    .table-demo tr:nth-child(even) {
+      background: var(--gray-100);
+    }
+    .components-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* ── 9. Grid & Breakpoints (Tailwind) ── */
+    .breakpoints-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+    .breakpoints-table th {
+      text-align: left;
+      font-weight: 600;
+      padding: 12px 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--gray-300);
+    }
+    .breakpoints-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .breakpoints-table .bp-name {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-family: 'Courier New', monospace;
+    }
+    .breakpoints-table .bp-value {
+      font-family: 'Courier New', monospace;
+      color: var(--text-secondary);
+    }
+
+    .grid-demo {
+      margin-top: 16px;
+    }
+    .grid-demo-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .grid-12 {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .grid-cell {
+      height: 40px;
+      background: var(--secondary-color);
+      border: 1px solid var(--primary-color);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+    .grid-span {
+      background: var(--primary-color);
+      color: var(--white);
+      border-color: var(--primary-hover);
+    }
+    .grid-row {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .grid-label {
+      font-size: 11px;
+      font-family: 'Courier New', monospace;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* ── Alternating section bg ── */
+    section:nth-child(even) {
+      background: var(--gray-100);
+    }
+
+    /* ── Transition demo ── */
+    .transition-demo {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .transition-box {
+      width: 100px;
+      height: 100px;
+      background: var(--primary-color);
+      border-radius: var(--radius-md);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 11px;
+      font-weight: 500;
+      text-align: center;
+    }
+    .transition-box:hover {
+      transform: scale(1.1) rotate(3deg);
+      border-radius: var(--radius-btn);
+      background: var(--primary-hover);
+    }
+    .transition-note {
+      font-size: 13px;
+      color: var(--text-secondary);
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="inner">
+      <h1 style="display:flex; align-items:center; gap:12px">
+        <svg xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 0 1357 446" fill="none"><path d="M338.505 139.915L383.52 113.733C384.848 112.961 384.846 111.043 383.517 110.273L194.003 0.58066C193.383 0.221531 192.618 0.221957 191.997 0.581782L0.996161 111.422C0.379523 111.78 0 112.439 0 113.152V333.343C0 334.059 0.382463 334.72 1.00289 335.077L192.002 444.926C192.62 445.281 193.38 445.281 193.998 444.925L382.513 336.223C383.843 335.455 383.848 333.536 382.521 332.762L338.503 307.085C337.883 306.723 337.116 306.722 336.495 307.081L194.001 389.422C193.382 389.78 192.618 389.78 191.999 389.422L49.4993 307.077C48.8809 306.72 48.5 306.06 48.5 305.346V140.658C48.5 139.942 48.8829 139.28 49.5039 138.923L191.998 57.0756C192.618 56.7195 193.381 56.7214 193.999 57.0808L336.495 139.916C337.116 140.277 337.884 140.277 338.505 139.915Z" fill="#FE6601"/><path d="M192.014 111.558L98.0248 164.787C96.6828 165.547 96.6697 167.476 98.0013 168.254L132.488 188.408C133.113 188.774 133.887 188.773 134.511 188.405L192 154.588C192.619 154.224 193.384 154.22 194.007 154.575L251.492 187.424C252.115 187.78 252.5 188.443 252.5 189.161V200.064C252.5 201.143 251.644 202.028 250.565 202.063L192.935 203.937C191.856 203.972 191 204.857 191 205.936V243C191 244.105 191.895 245 193 245H250.5C251.605 245 252.5 245.895 252.5 247V256.856C252.5 257.565 252.125 258.221 251.514 258.58L194.014 292.404C193.388 292.772 192.612 292.772 191.986 292.404L134.477 258.575C133.871 258.218 133.122 258.206 132.505 258.543L98.1164 277.3C96.7483 278.046 96.7215 280.001 98.0686 280.785L191.994 335.415C192.616 335.777 193.384 335.777 194.006 335.415L290.006 279.578C290.621 279.22 291 278.562 291 277.85V167.666C291 166.945 290.612 166.281 289.986 165.926L193.986 111.558C193.374 111.212 192.626 111.212 192.014 111.558Z" fill="#FE6601"/><path d="M524.981 242.692V205.616H628.435V242.692H524.981ZM552.489 117.112C568.236 117.112 582.688 119.803 595.844 125.185C609 130.368 620.462 137.843 630.229 147.61C639.996 157.377 647.571 168.839 652.953 181.995C658.335 195.151 661.026 209.603 661.026 225.35C661.026 241.097 658.335 255.549 652.953 268.705C647.571 281.861 639.996 293.323 630.229 303.09C620.462 312.857 609 320.432 595.844 325.814C582.688 330.997 568.236 333.588 552.489 333.588C533.951 333.588 517.207 330.399 502.257 324.02C487.506 317.641 475.148 308.372 465.181 296.213L495.978 267.509C503.353 275.881 511.526 282.16 520.496 286.346C529.466 290.333 539.333 292.326 550.097 292.326C559.067 292.326 567.339 290.731 574.914 287.542C582.688 284.153 589.266 279.569 594.648 273.788C600.229 267.808 604.415 260.732 607.206 252.559C610.196 244.386 611.691 235.317 611.691 225.35C611.691 215.383 610.196 206.314 607.206 198.141C604.415 189.968 600.229 182.992 594.648 177.211C589.266 171.231 582.688 166.646 574.914 163.457C567.339 160.068 559.067 158.374 550.097 158.374C539.333 158.374 529.466 160.467 520.496 164.653C511.526 168.64 503.353 174.819 495.978 183.191L465.181 154.487C475.148 142.328 487.506 133.059 502.257 126.68C517.207 120.301 533.951 117.112 552.489 117.112ZM698.959 330V120.7H867.894V159.271H747.098V202.327H805.104C830.42 202.327 849.655 207.609 862.811 218.174C876.167 228.739 882.844 244.087 882.844 264.22C882.844 284.951 875.469 301.097 860.718 312.658C845.968 324.219 825.137 330 798.227 330H698.959ZM747.098 294.12H795.536C807.895 294.12 817.363 291.728 823.941 286.944C830.519 281.961 833.808 274.785 833.808 265.416C833.808 247.077 821.051 237.908 795.536 237.908H747.098V294.12ZM919.705 330V120.7H967.844V257.044L1067.71 120.7H1113.16V330H1065.32V193.955L965.452 330H919.705ZM1264.24 333.588C1248.09 333.588 1233.04 330.997 1219.09 325.814C1205.34 320.432 1193.38 312.857 1183.21 303.09C1173.04 293.323 1165.07 281.861 1159.29 268.705C1153.71 255.549 1150.92 241.097 1150.92 225.35C1150.92 209.603 1153.71 195.151 1159.29 181.995C1165.07 168.839 1173.04 157.377 1183.21 147.61C1193.58 137.843 1205.64 130.368 1219.39 125.185C1233.14 119.803 1248.19 117.112 1264.54 117.112C1282.68 117.112 1299.02 120.301 1313.57 126.68C1328.33 132.859 1340.68 142.029 1350.65 154.188L1319.55 182.892C1312.38 174.719 1304.41 168.64 1295.63 164.653C1286.86 160.467 1277.3 158.374 1266.93 158.374C1257.16 158.374 1248.19 159.969 1240.02 163.158C1231.85 166.347 1224.77 170.932 1218.79 176.912C1212.81 182.892 1208.13 189.968 1204.74 198.141C1201.55 206.314 1199.95 215.383 1199.95 225.35C1199.95 235.317 1201.55 244.386 1204.74 252.559C1208.13 260.732 1212.81 267.808 1218.79 273.788C1224.77 279.768 1231.85 284.353 1240.02 287.542C1248.19 290.731 1257.16 292.326 1266.93 292.326C1277.3 292.326 1286.86 290.333 1295.63 286.346C1304.41 282.16 1312.38 275.881 1319.55 267.509L1350.65 296.213C1340.68 308.372 1328.33 317.641 1313.57 324.02C1299.02 330.399 1282.58 333.588 1264.24 333.588Z" fill="black"/></svg>
+        Design Tokens
+      </h1>
+      <span class="badge">modulmetall.ru &mdash; 30.03.2026</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 0. LOGO -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">00 / Logo</div>
+      <div class="section-subtitle">Логотип</div>
+
+      <div style="display:flex; gap:64px; align-items:start; flex-wrap:wrap">
+
+        <!-- Full logo -->
+        <div>
+          <div class="color-group-title" style="margin-bottom:16px">Полный логотип (иконка + текст)</div>
+          <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:var(--radius-lg); padding:40px 48px; display:inline-flex; align-items:center; justify-content:center">
+            <img src="../src/assets/ebis-logo.svg" alt="ЭБИС" style="height:48px">
+          </div>
+          <div style="margin-top:12px; font-size:12px; color:var(--text-muted); font-family:'Courier New',monospace">
+            ebis-logo.svg &mdash; 1357&times;446
+          </div>
+        </div>
+
+        <!-- On dark bg -->
+        <div>
+          <div class="color-group-title" style="margin-bottom:16px">На тёмном фоне</div>
+          <div style="background:var(--text-primary); border-radius:var(--radius-lg); padding:40px 48px; display:inline-flex; align-items:center; justify-content:center">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 1357 446" fill="none"><path d="M338.505 139.915L383.52 113.733C384.848 112.961 384.846 111.043 383.517 110.273L194.003 0.58066C193.383 0.221531 192.618 0.221957 191.997 0.581782L0.996161 111.422C0.379523 111.78 0 112.439 0 113.152V333.343C0 334.059 0.382463 334.72 1.00289 335.077L192.002 444.926C192.62 445.281 193.38 445.281 193.998 444.925L382.513 336.223C383.843 335.455 383.848 333.536 382.521 332.762L338.503 307.085C337.883 306.723 337.116 306.722 336.495 307.081L194.001 389.422C193.382 389.78 192.618 389.78 191.999 389.422L49.4993 307.077C48.8809 306.72 48.5 306.06 48.5 305.346V140.658C48.5 139.942 48.8829 139.28 49.5039 138.923L191.998 57.0756C192.618 56.7195 193.381 56.7214 193.999 57.0808L336.495 139.916C337.116 140.277 337.884 140.277 338.505 139.915Z" fill="#FE6601"/><path d="M192.014 111.558L98.0248 164.787C96.6828 165.547 96.6697 167.476 98.0013 168.254L132.488 188.408C133.113 188.774 133.887 188.773 134.511 188.405L192 154.588C192.619 154.224 193.384 154.22 194.007 154.575L251.492 187.424C252.115 187.78 252.5 188.443 252.5 189.161V200.064C252.5 201.143 251.644 202.028 250.565 202.063L192.935 203.937C191.856 203.972 191 204.857 191 205.936V243C191 244.105 191.895 245 193 245H250.5C251.605 245 252.5 245.895 252.5 247V256.856C252.5 257.565 252.125 258.221 251.514 258.58L194.014 292.404C193.388 292.772 192.612 292.772 191.986 292.404L134.477 258.575C133.871 258.218 133.122 258.206 132.505 258.543L98.1164 277.3C96.7483 278.046 96.7215 280.001 98.0686 280.785L191.994 335.415C192.616 335.777 193.384 335.777 194.006 335.415L290.006 279.578C290.621 279.22 291 278.562 291 277.85V167.666C291 166.945 290.612 166.281 289.986 165.926L193.986 111.558C193.374 111.212 192.626 111.212 192.014 111.558Z" fill="#FE6601"/><path d="M524.981 242.692V205.616H628.435V242.692H524.981ZM552.489 117.112C568.236 117.112 582.688 119.803 595.844 125.185C609 130.368 620.462 137.843 630.229 147.61C639.996 157.377 647.571 168.839 652.953 181.995C658.335 195.151 661.026 209.603 661.026 225.35C661.026 241.097 658.335 255.549 652.953 268.705C647.571 281.861 639.996 293.323 630.229 303.09C620.462 312.857 609 320.432 595.844 325.814C582.688 330.997 568.236 333.588 552.489 333.588C533.951 333.588 517.207 330.399 502.257 324.02C487.506 317.641 475.148 308.372 465.181 296.213L495.978 267.509C503.353 275.881 511.526 282.16 520.496 286.346C529.466 290.333 539.333 292.326 550.097 292.326C559.067 292.326 567.339 290.731 574.914 287.542C582.688 284.153 589.266 279.569 594.648 273.788C600.229 267.808 604.415 260.732 607.206 252.559C610.196 244.386 611.691 235.317 611.691 225.35C611.691 215.383 610.196 206.314 607.206 198.141C604.415 189.968 600.229 182.992 594.648 177.211C589.266 171.231 582.688 166.646 574.914 163.457C567.339 160.068 559.067 158.374 550.097 158.374C539.333 158.374 529.466 160.467 520.496 164.653C511.526 168.64 503.353 174.819 495.978 183.191L465.181 154.487C475.148 142.328 487.506 133.059 502.257 126.68C517.207 120.301 533.951 117.112 552.489 117.112ZM698.959 330V120.7H867.894V159.271H747.098V202.327H805.104C830.42 202.327 849.655 207.609 862.811 218.174C876.167 228.739 882.844 244.087 882.844 264.22C882.844 284.951 875.469 301.097 860.718 312.658C845.968 324.219 825.137 330 798.227 330H698.959ZM747.098 294.12H795.536C807.895 294.12 817.363 291.728 823.941 286.944C830.519 281.961 833.808 274.785 833.808 265.416C833.808 247.077 821.051 237.908 795.536 237.908H747.098V294.12ZM919.705 330V120.7H967.844V257.044L1067.71 120.7H1113.16V330H1065.32V193.955L965.452 330H919.705ZM1264.24 333.588C1248.09 333.588 1233.04 330.997 1219.09 325.814C1205.34 320.432 1193.38 312.857 1183.21 303.09C1173.04 293.323 1165.07 281.861 1159.29 268.705C1153.71 255.549 1150.92 241.097 1150.92 225.35C1150.92 209.603 1153.71 195.151 1159.29 181.995C1165.07 168.839 1173.04 157.377 1183.21 147.61C1193.58 137.843 1205.64 130.368 1219.39 125.185C1233.14 119.803 1248.19 117.112 1264.54 117.112C1282.68 117.112 1299.02 120.301 1313.57 126.68C1328.33 132.859 1340.68 142.029 1350.65 154.188L1319.55 182.892C1312.38 174.719 1304.41 168.64 1295.63 164.653C1286.86 160.467 1277.3 158.374 1266.93 158.374C1257.16 158.374 1248.19 159.969 1240.02 163.158C1231.85 166.347 1224.77 170.932 1218.79 176.912C1212.81 182.892 1208.13 189.968 1204.74 198.141C1201.55 206.314 1199.95 215.383 1199.95 225.35C1199.95 235.317 1201.55 244.386 1204.74 252.559C1208.13 260.732 1212.81 267.808 1218.79 273.788C1224.77 279.768 1231.85 284.353 1240.02 287.542C1248.19 290.731 1257.16 292.326 1266.93 292.326C1277.3 292.326 1286.86 290.333 1295.63 286.346C1304.41 282.16 1312.38 275.881 1319.55 267.509L1350.65 296.213C1340.68 308.372 1328.33 317.641 1313.57 324.02C1299.02 330.399 1282.58 333.588 1264.24 333.588Z" fill="white"/></svg>
+          </div>
+          <div style="margin-top:12px; font-size:12px; color:var(--text-muted)">
+            Текст &laquo;ЭБИС&raquo; &rarr; белый для тёмных фонов
+          </div>
+        </div>
+
+        <!-- Icon only -->
+        <div>
+          <div class="color-group-title" style="margin-bottom:16px">Только иконка (favicon)</div>
+          <div style="display:flex; gap:16px; align-items:end">
+            <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:var(--radius-md); padding:16px; display:inline-flex">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 400 446" fill="none"><path d="M338.505 139.915L383.52 113.733C384.848 112.961 384.846 111.043 383.517 110.273L194.003 0.58066C193.383 0.221531 192.618 0.221957 191.997 0.581782L0.996161 111.422C0.379523 111.78 0 112.439 0 113.152V333.343C0 334.059 0.382463 334.72 1.00289 335.077L192.002 444.926C192.62 445.281 193.38 445.281 193.998 444.925L382.513 336.223C383.843 335.455 383.848 333.536 382.521 332.762L338.503 307.085C337.883 306.723 337.116 306.722 336.495 307.081L194.001 389.422C193.382 389.78 192.618 389.78 191.999 389.422L49.4993 307.077C48.8809 306.72 48.5 306.06 48.5 305.346V140.658C48.5 139.942 48.8829 139.28 49.5039 138.923L191.998 57.0756C192.618 56.7195 193.381 56.7214 193.999 57.0808L336.495 139.916C337.116 140.277 337.884 140.277 338.505 139.915Z" fill="#FE6601"/><path d="M192.014 111.558L98.0248 164.787C96.6828 165.547 96.6697 167.476 98.0013 168.254L132.488 188.408C133.113 188.774 133.887 188.773 134.511 188.405L192 154.588C192.619 154.224 193.384 154.22 194.007 154.575L251.492 187.424C252.115 187.78 252.5 188.443 252.5 189.161V200.064C252.5 201.143 251.644 202.028 250.565 202.063L192.935 203.937C191.856 203.972 191 204.857 191 205.936V243C191 244.105 191.895 245 193 245H250.5C251.605 245 252.5 245.895 252.5 247V256.856C252.5 257.565 252.125 258.221 251.514 258.58L194.014 292.404C193.388 292.772 192.612 292.772 191.986 292.404L134.477 258.575C133.871 258.218 133.122 258.206 132.505 258.543L98.1164 277.3C96.7483 278.046 96.7215 280.001 98.0686 280.785L191.994 335.415C192.616 335.777 193.384 335.777 194.006 335.415L290.006 279.578C290.621 279.22 291 278.562 291 277.85V167.666C291 166.945 290.612 166.281 289.986 165.926L193.986 111.558C193.374 111.212 192.626 111.212 192.014 111.558Z" fill="#FE6601"/></svg>
+            </div>
+            <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:var(--radius-sm); padding:8px; display:inline-flex">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 400 446" fill="none"><path d="M338.505 139.915L383.52 113.733C384.848 112.961 384.846 111.043 383.517 110.273L194.003 0.58066C193.383 0.221531 192.618 0.221957 191.997 0.581782L0.996161 111.422C0.379523 111.78 0 112.439 0 113.152V333.343C0 334.059 0.382463 334.72 1.00289 335.077L192.002 444.926C192.62 445.281 193.38 445.281 193.998 444.925L382.513 336.223C383.843 335.455 383.848 333.536 382.521 332.762L338.503 307.085C337.883 306.723 337.116 306.722 336.495 307.081L194.001 389.422C193.382 389.78 192.618 389.78 191.999 389.422L49.4993 307.077C48.8809 306.72 48.5 306.06 48.5 305.346V140.658C48.5 139.942 48.8829 139.28 49.5039 138.923L191.998 57.0756C192.618 56.7195 193.381 56.7214 193.999 57.0808L336.495 139.916C337.116 140.277 337.884 140.277 338.505 139.915Z" fill="#FE6601"/><path d="M192.014 111.558L98.0248 164.787C96.6828 165.547 96.6697 167.476 98.0013 168.254L132.488 188.408C133.113 188.774 133.887 188.773 134.511 188.405L192 154.588C192.619 154.224 193.384 154.22 194.007 154.575L251.492 187.424C252.115 187.78 252.5 188.443 252.5 189.161V200.064C252.5 201.143 251.644 202.028 250.565 202.063L192.935 203.937C191.856 203.972 191 204.857 191 205.936V243C191 244.105 191.895 245 193 245H250.5C251.605 245 252.5 245.895 252.5 247V256.856C252.5 257.565 252.125 258.221 251.514 258.58L194.014 292.404C193.388 292.772 192.612 292.772 191.986 292.404L134.477 258.575C133.871 258.218 133.122 258.206 132.505 258.543L98.1164 277.3C96.7483 278.046 96.7215 280.001 98.0686 280.785L191.994 335.415C192.616 335.777 193.384 335.777 194.006 335.415L290.006 279.578C290.621 279.22 291 278.562 291 277.85V167.666C291 166.945 290.612 166.281 289.986 165.926L193.986 111.558C193.374 111.212 192.626 111.212 192.014 111.558Z" fill="#FE6601"/></svg>
+            </div>
+            <div style="background:var(--text-primary); border-radius:var(--radius-sm); padding:8px; display:inline-flex">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 400 446" fill="none"><path d="M338.505 139.915L383.52 113.733C384.848 112.961 384.846 111.043 383.517 110.273L194.003 0.58066C193.383 0.221531 192.618 0.221957 191.997 0.581782L0.996161 111.422C0.379523 111.78 0 112.439 0 113.152V333.343C0 334.059 0.382463 334.72 1.00289 335.077L192.002 444.926C192.62 445.281 193.38 445.281 193.998 444.925L382.513 336.223C383.843 335.455 383.848 333.536 382.521 332.762L338.503 307.085C337.883 306.723 337.116 306.722 336.495 307.081L194.001 389.422C193.382 389.78 192.618 389.78 191.999 389.422L49.4993 307.077C48.8809 306.72 48.5 306.06 48.5 305.346V140.658C48.5 139.942 48.8829 139.28 49.5039 138.923L191.998 57.0756C192.618 56.7195 193.381 56.7214 193.999 57.0808L336.495 139.916C337.116 140.277 337.884 140.277 338.505 139.915Z" fill="#FE6601"/><path d="M192.014 111.558L98.0248 164.787C96.6828 165.547 96.6697 167.476 98.0013 168.254L132.488 188.408C133.113 188.774 133.887 188.773 134.511 188.405L192 154.588C192.619 154.224 193.384 154.22 194.007 154.575L251.492 187.424C252.115 187.78 252.5 188.443 252.5 189.161V200.064C252.5 201.143 251.644 202.028 250.565 202.063L192.935 203.937C191.856 203.972 191 204.857 191 205.936V243C191 244.105 191.895 245 193 245H250.5C251.605 245 252.5 245.895 252.5 247V256.856C252.5 257.565 252.125 258.221 251.514 258.58L194.014 292.404C193.388 292.772 192.612 292.772 191.986 292.404L134.477 258.575C133.871 258.218 133.122 258.206 132.505 258.543L98.1164 277.3C96.7483 278.046 96.7215 280.001 98.0686 280.785L191.994 335.415C192.616 335.777 193.384 335.777 194.006 335.415L290.006 279.578C290.621 279.22 291 278.562 291 277.85V167.666C291 166.945 290.612 166.281 289.986 165.926L193.986 111.558C193.374 111.212 192.626 111.212 192.014 111.558Z" fill="#FE6601"/></svg>
+            </div>
+          </div>
+          <div style="margin-top:12px; font-size:12px; color:var(--text-muted)">
+            48px / 24px / 16px &mdash; для favicon, иконок
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo colors -->
+      <div style="margin-top:48px">
+        <div class="color-group-title" style="margin-bottom:16px">Цвета логотипа</div>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#FE6601"></div>
+            <div class="color-info">
+              <div class="color-name">Logo Orange</div>
+              <div class="color-value">#FE6601</div>
+              <div class="color-desc">Шестиугольник, буква «Э»</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:linear-gradient(180deg, #FFA800 0%, #FE6601 100%)"></div>
+            <div class="color-info">
+              <div class="color-name">Logo Gradient</div>
+              <div class="color-value">#FFA800 &rarr; #FE6601</div>
+              <div class="color-desc">Градиент буквы «Э» (в оригинале)</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#000000"></div>
+            <div class="color-info">
+              <div class="color-name">Logo Text</div>
+              <div class="color-value">#000000</div>
+              <div class="color-desc">Текст «ЭБИС»</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 1. COLORS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">01 / Palette</div>
+      <div class="section-subtitle">Цветовая палитра</div>
+
+      <!-- Primary -->
+      <div class="color-group">
+        <div class="color-group-title">Основные</div>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#F36F2E"></div>
+            <div class="color-info">
+              <div class="color-name">Primary</div>
+              <div class="color-value">#F36F2E</div>
+              <div class="color-desc">Логотип, акценты, иконки</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#F36000"></div>
+            <div class="color-info">
+              <div class="color-name">Primary CTA</div>
+              <div class="color-value">#F36000</div>
+              <div class="color-desc">Кнопки, активные элементы</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#E55A1F"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Hover</div>
+              <div class="color-value">#E55A1F</div>
+              <div class="color-desc">Hover-состояние кнопок</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#FFF0E2"></div>
+            <div class="color-info">
+              <div class="color-name">Secondary</div>
+              <div class="color-value">#FFF0E2</div>
+              <div class="color-desc">Светлый оранжевый фон</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="color-group">
+        <div class="color-group-title">Текст</div>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#1A1A1A"></div>
+            <div class="color-info">
+              <div class="color-name">Text Primary</div>
+              <div class="color-value">#1A1A1A</div>
+              <div class="color-desc">Заголовки, основной текст</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#616161"></div>
+            <div class="color-info">
+              <div class="color-name">Text Secondary</div>
+              <div class="color-value">#616161</div>
+              <div class="color-desc">Подписи, вспомогательный</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#9E9E9E"></div>
+            <div class="color-info">
+              <div class="color-name">Text Muted</div>
+              <div class="color-value">#9E9E9E</div>
+              <div class="color-desc">Плейсхолдеры, мета-текст</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Neutrals -->
+      <div class="color-group">
+        <div class="color-group-title">Нейтральные</div>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch bordered" style="background:#FFFFFF"></div>
+            <div class="color-info">
+              <div class="color-name">White</div>
+              <div class="color-value">#FFFFFF</div>
+              <div class="color-desc">Основной фон</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#F5F5F5"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 100</div>
+              <div class="color-value">#F5F5F5</div>
+              <div class="color-desc">Фон секций</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#EEEEEE"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 200</div>
+              <div class="color-value">#EEEEEE</div>
+              <div class="color-desc">Фон карточек</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#E0E0E0"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 300</div>
+              <div class="color-value">#E0E0E0</div>
+              <div class="color-desc">Бордеры, разделители</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#D4D4D4"></div>
+            <div class="color-info">
+              <div class="color-name">Gray 400</div>
+              <div class="color-value">#D4D4D4</div>
+              <div class="color-desc">Фон-разделитель (Tilda)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 2. TYPOGRAPHY -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">02 / Typography</div>
+      <div class="section-subtitle">Типографика</div>
+
+      <!-- Weight scale -->
+      <div class="color-group-title" style="margin-bottom:24px">Весовые начертания &mdash; Montserrat</div>
+      <div class="weight-scale">
+        <div class="weight-item">
+          <div class="weight-demo" style="font-weight:300">Aa</div>
+          <div class="weight-label">300</div>
+          <div class="weight-name">Light</div>
+        </div>
+        <div class="weight-item">
+          <div class="weight-demo" style="font-weight:400">Aa</div>
+          <div class="weight-label">400</div>
+          <div class="weight-name">Regular</div>
+        </div>
+        <div class="weight-item">
+          <div class="weight-demo" style="font-weight:500">Aa</div>
+          <div class="weight-label">500</div>
+          <div class="weight-name">Medium</div>
+        </div>
+        <div class="weight-item">
+          <div class="weight-demo" style="font-weight:600">Aa</div>
+          <div class="weight-label">600</div>
+          <div class="weight-name">Semibold</div>
+        </div>
+        <div class="weight-item">
+          <div class="weight-demo" style="font-weight:700">Aa</div>
+          <div class="weight-label">700</div>
+          <div class="weight-name">Bold</div>
+        </div>
+      </div>
+
+      <!-- Font size scale -->
+      <div class="color-group-title" style="margin-bottom:24px">Шкала размеров</div>
+      <div class="size-scale">
+        <div class="size-row">
+          <div class="size-label">14px &mdash; sm</div>
+          <div class="size-demo" style="font-size:14px; font-weight:600">Узнать подробнее</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">16px &mdash; base</div>
+          <div class="size-demo" style="font-size:16px; font-weight:400">Основной текст страницы</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">18px &mdash; lg</div>
+          <div class="size-demo" style="font-size:18px; font-weight:400">Описательные абзацы и подзаголовки</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">20px &mdash; xl</div>
+          <div class="size-demo" style="font-size:20px; font-weight:500">Подзаголовки секций</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">24px &mdash; 2xl</div>
+          <div class="size-demo" style="font-size:24px; font-weight:600">Заголовки карточек и блоков</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">30px &mdash; 3xl</div>
+          <div class="size-demo" style="font-size:30px; font-weight:700">Промежуточные заголовки</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">36px &mdash; 4xl</div>
+          <div class="size-demo" style="font-size:36px; font-weight:700">Крупные секционные заголовки</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">47px &mdash; 5xl</div>
+          <div class="size-demo" style="font-size:47px; font-weight:400; line-height:1">Для частных клиентов</div>
+        </div>
+        <div class="size-row">
+          <div class="size-label">48px &mdash; 6xl</div>
+          <div class="size-demo" style="font-size:48px; font-weight:700; line-height:1.1">Наши производители</div>
+        </div>
+      </div>
+
+      <!-- Heading specimens -->
+      <div class="color-group-title" style="margin-top:48px; margin-bottom:24px">Заголовки со страницы</div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">H1</span>
+          <span class="type-tag">28px</span>
+          <span class="type-tag">weight: 400</span>
+          <span class="type-tag">line-height: 32px</span>
+        </div>
+        <div class="type-sample" style="font-size:28px; font-weight:400; line-height:32px">
+          Три характера надежности. <strong>Одна крыша над вашим домом</strong>
+        </div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">H2 &mdash; light</span>
+          <span class="type-tag">47px</span>
+          <span class="type-tag">weight: 400</span>
+          <span class="type-tag">line-height: 47px</span>
+        </div>
+        <div class="type-sample" style="font-size:47px; font-weight:400; line-height:47px">
+          Для частных клиентов
+        </div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">H2 &mdash; bold</span>
+          <span class="type-tag">48px</span>
+          <span class="type-tag">weight: 700</span>
+          <span class="type-tag">line-height: 58px</span>
+        </div>
+        <div class="type-sample" style="font-size:48px; font-weight:700; line-height:58px">
+          Наши производители и партнеры
+        </div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Body</span>
+          <span class="type-tag">18px</span>
+          <span class="type-tag">weight: 400</span>
+          <span class="type-tag">line-height: 27px</span>
+        </div>
+        <div class="type-sample" style="font-size:18px; font-weight:400; line-height:27px; color: var(--text-secondary)">
+          Более 300 отзывов, тысячи довольных клиентов. Мы не стали расширять ассортимент вслепую &mdash; вместо этого лично объехали заводы Европы, России и Азии.
+        </div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Nav</span>
+          <span class="type-tag">16px</span>
+          <span class="type-tag">weight: 300</span>
+        </div>
+        <div class="type-sample" style="font-size:16px; font-weight:300">
+          Производители &nbsp;&nbsp; Сравнить цены &nbsp;&nbsp; Продукция &nbsp;&nbsp; Отзывы &nbsp;&nbsp; Контакты
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 3. SPACING -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">03 / Spacing</div>
+      <div class="section-subtitle">Отступы</div>
+
+      <div class="spacing-grid">
+        <div class="spacing-row">
+          <div class="spacing-label">--spacing-xs</div>
+          <div class="spacing-bar" style="width:4px"></div>
+          <div class="spacing-px">4px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">--spacing-sm</div>
+          <div class="spacing-bar" style="width:8px"></div>
+          <div class="spacing-px">8px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">--spacing-md</div>
+          <div class="spacing-bar" style="width:16px"></div>
+          <div class="spacing-px">16px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">--spacing-lg</div>
+          <div class="spacing-bar" style="width:24px"></div>
+          <div class="spacing-px">24px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">--spacing-xl</div>
+          <div class="spacing-bar" style="width:32px"></div>
+          <div class="spacing-px">32px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">--spacing-2xl</div>
+          <div class="spacing-bar" style="width:48px"></div>
+          <div class="spacing-px">48px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">--spacing-3xl</div>
+          <div class="spacing-bar" style="width:64px"></div>
+          <div class="spacing-px">64px</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 4. BORDER RADIUS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">04 / Radius</div>
+      <div class="section-subtitle">Скругления</div>
+
+      <div class="radius-grid">
+        <div class="radius-card">
+          <div class="radius-demo" style="border-radius:4px">
+            <span class="radius-val">4px</span>
+          </div>
+          <div class="radius-name">Small</div>
+          <div class="radius-token">--radius-sm</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-demo" style="border-radius:8px">
+            <span class="radius-val">8px</span>
+          </div>
+          <div class="radius-name">Medium</div>
+          <div class="radius-token">--radius-md</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-demo" style="border-radius:12px">
+            <span class="radius-val">12px</span>
+          </div>
+          <div class="radius-name">Large</div>
+          <div class="radius-token">--radius-lg</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-demo" style="border-radius:30px">
+            <span class="radius-val">30px</span>
+          </div>
+          <div class="radius-name">Button</div>
+          <div class="radius-token">--radius-btn</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-demo" style="border-radius:50px; width:140px">
+            <span class="radius-val">50px</span>
+          </div>
+          <div class="radius-name">Button Large (pill)</div>
+          <div class="radius-token">--radius-btn-lg</div>
+        </div>
+        <div class="radius-card">
+          <div class="radius-demo" style="border-radius:50%">
+            <span class="radius-val">50%</span>
+          </div>
+          <div class="radius-name">Circle</div>
+          <div class="radius-token">--radius-full</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 5. SHADOWS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">05 / Shadows</div>
+      <div class="section-subtitle">Тени</div>
+
+      <div class="shadow-grid">
+        <div class="shadow-card" style="box-shadow: var(--shadow-sm)">
+          <div class="shadow-name">Shadow SM</div>
+          <div class="shadow-value">0 1px 2px 0 rgba(0,0,0,0.05)</div>
+        </div>
+        <div class="shadow-card" style="box-shadow: var(--shadow-md)">
+          <div class="shadow-name">Shadow MD</div>
+          <div class="shadow-value">0 4px 6px -1px rgba(0,0,0,0.1)</div>
+        </div>
+        <div class="shadow-card" style="box-shadow: var(--shadow-lg)">
+          <div class="shadow-name">Shadow LG</div>
+          <div class="shadow-value">0 10px 15px -3px rgba(0,0,0,0.1)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 6. BUTTONS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">06 / Buttons</div>
+      <div class="section-subtitle">Кнопки</div>
+
+      <div class="buttons-showcase">
+        <div>
+          <div class="btn-label" style="margin-bottom:12px">Primary &mdash; 14px / 600 / radius 30px</div>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#">Узнать подробнее</a>
+            <a class="btn btn-phone" href="#">+7 (4012) 99 40 40</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="btn-label" style="margin-bottom:12px">Primary Large &mdash; 14px / 400 / radius 50px / uppercase</div>
+          <div class="btn-row">
+            <a class="btn btn-primary-lg" href="#">ОСТАВИТЬ ЗАЯВКУ</a>
+            <a class="btn btn-primary-lg" href="#">РАССЧИТАТЬ СТОИМОСТЬ</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="btn-label" style="margin-bottom:12px">Outline (производный стиль)</div>
+          <div class="btn-row">
+            <a class="btn btn-outline" href="#">Подробнее</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 7. FORM ELEMENTS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">07 / Forms</div>
+      <div class="section-subtitle">Элементы форм</div>
+
+      <div class="form-showcase">
+        <div class="form-group">
+          <label class="form-label">Ваше имя</label>
+          <input class="form-input" type="text" placeholder="Введите имя">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ваш номер телефона</label>
+          <input class="form-input" type="tel" placeholder="+7 (000) 000-00-00">
+        </div>
+        <div class="btn-row" style="margin-top:8px">
+          <a class="btn btn-primary-lg" href="#">ОСТАВИТЬ ЗАЯВКУ</a>
+        </div>
+        <div class="form-note">
+          Montserrat 16px / border: 1px solid black / height: 60px / padding: 0 20px
+        </div>
+
+        <div style="margin-top:32px">
+          <div class="color-group-title" style="margin-bottom:16px">Альтернативный стиль (underline)</div>
+          <div class="form-group">
+            <input class="form-input-underline" type="text" placeholder="Ваше имя">
+          </div>
+          <div class="form-group">
+            <input class="form-input-underline" type="tel" placeholder="Номер телефона">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 8. COMPONENTS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">08 / Components</div>
+      <div class="section-subtitle">Компоненты</div>
+
+      <div class="components-list">
+
+        <!-- Nav (full width) -->
+        <div class="component-card">
+          <div class="component-preview" style="padding:16px 24px; background:var(--white)">
+            <div class="nav-demo">
+              <div class="nav-logo"><svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 1357 446" fill="none"><path d="M338.505 139.915L383.52 113.733C384.848 112.961 384.846 111.043 383.517 110.273L194.003 0.58066C193.383 0.221531 192.618 0.221957 191.997 0.581782L0.996161 111.422C0.379523 111.78 0 112.439 0 113.152V333.343C0 334.059 0.382463 334.72 1.00289 335.077L192.002 444.926C192.62 445.281 193.38 445.281 193.998 444.925L382.513 336.223C383.843 335.455 383.848 333.536 382.521 332.762L338.503 307.085C337.883 306.723 337.116 306.722 336.495 307.081L194.001 389.422C193.382 389.78 192.618 389.78 191.999 389.422L49.4993 307.077C48.8809 306.72 48.5 306.06 48.5 305.346V140.658C48.5 139.942 48.8829 139.28 49.5039 138.923L191.998 57.0756C192.618 56.7195 193.381 56.7214 193.999 57.0808L336.495 139.916C337.116 140.277 337.884 140.277 338.505 139.915Z" fill="#FE6601"/><path d="M192.014 111.558L98.0248 164.787C96.6828 165.547 96.6697 167.476 98.0013 168.254L132.488 188.408C133.113 188.774 133.887 188.773 134.511 188.405L192 154.588C192.619 154.224 193.384 154.22 194.007 154.575L251.492 187.424C252.115 187.78 252.5 188.443 252.5 189.161V200.064C252.5 201.143 251.644 202.028 250.565 202.063L192.935 203.937C191.856 203.972 191 204.857 191 205.936V243C191 244.105 191.895 245 193 245H250.5C251.605 245 252.5 245.895 252.5 247V256.856C252.5 257.565 252.125 258.221 251.514 258.58L194.014 292.404C193.388 292.772 192.612 292.772 191.986 292.404L134.477 258.575C133.871 258.218 133.122 258.206 132.505 258.543L98.1164 277.3C96.7483 278.046 96.7215 280.001 98.0686 280.785L191.994 335.415C192.616 335.777 193.384 335.777 194.006 335.415L290.006 279.578C290.621 279.22 291 278.562 291 277.85V167.666C291 166.945 290.612 166.281 289.986 165.926L193.986 111.558C193.374 111.212 192.626 111.212 192.014 111.558Z" fill="#FE6601"/><path d="M524.981 242.692V205.616H628.435V242.692H524.981ZM552.489 117.112C568.236 117.112 582.688 119.803 595.844 125.185C609 130.368 620.462 137.843 630.229 147.61C639.996 157.377 647.571 168.839 652.953 181.995C658.335 195.151 661.026 209.603 661.026 225.35C661.026 241.097 658.335 255.549 652.953 268.705C647.571 281.861 639.996 293.323 630.229 303.09C620.462 312.857 609 320.432 595.844 325.814C582.688 330.997 568.236 333.588 552.489 333.588C533.951 333.588 517.207 330.399 502.257 324.02C487.506 317.641 475.148 308.372 465.181 296.213L495.978 267.509C503.353 275.881 511.526 282.16 520.496 286.346C529.466 290.333 539.333 292.326 550.097 292.326C559.067 292.326 567.339 290.731 574.914 287.542C582.688 284.153 589.266 279.569 594.648 273.788C600.229 267.808 604.415 260.732 607.206 252.559C610.196 244.386 611.691 235.317 611.691 225.35C611.691 215.383 610.196 206.314 607.206 198.141C604.415 189.968 600.229 182.992 594.648 177.211C589.266 171.231 582.688 166.646 574.914 163.457C567.339 160.068 559.067 158.374 550.097 158.374C539.333 158.374 529.466 160.467 520.496 164.653C511.526 168.64 503.353 174.819 495.978 183.191L465.181 154.487C475.148 142.328 487.506 133.059 502.257 126.68C517.207 120.301 533.951 117.112 552.489 117.112ZM698.959 330V120.7H867.894V159.271H747.098V202.327H805.104C830.42 202.327 849.655 207.609 862.811 218.174C876.167 228.739 882.844 244.087 882.844 264.22C882.844 284.951 875.469 301.097 860.718 312.658C845.968 324.219 825.137 330 798.227 330H698.959ZM747.098 294.12H795.536C807.895 294.12 817.363 291.728 823.941 286.944C830.519 281.961 833.808 274.785 833.808 265.416C833.808 247.077 821.051 237.908 795.536 237.908H747.098V294.12ZM919.705 330V120.7H967.844V257.044L1067.71 120.7H1113.16V330H1065.32V193.955L965.452 330H919.705ZM1264.24 333.588C1248.09 333.588 1233.04 330.997 1219.09 325.814C1205.34 320.432 1193.38 312.857 1183.21 303.09C1173.04 293.323 1165.07 281.861 1159.29 268.705C1153.71 255.549 1150.92 241.097 1150.92 225.35C1150.92 209.603 1153.71 195.151 1159.29 181.995C1165.07 168.839 1173.04 157.377 1183.21 147.61C1193.58 137.843 1205.64 130.368 1219.39 125.185C1233.14 119.803 1248.19 117.112 1264.54 117.112C1282.68 117.112 1299.02 120.301 1313.57 126.68C1328.33 132.859 1340.68 142.029 1350.65 154.188L1319.55 182.892C1312.38 174.719 1304.41 168.64 1295.63 164.653C1286.86 160.467 1277.3 158.374 1266.93 158.374C1257.16 158.374 1248.19 159.969 1240.02 163.158C1231.85 166.347 1224.77 170.932 1218.79 176.912C1212.81 182.892 1208.13 189.968 1204.74 198.141C1201.55 206.314 1199.95 215.383 1199.95 225.35C1199.95 235.317 1201.55 244.386 1204.74 252.559C1208.13 260.732 1212.81 267.808 1218.79 273.788C1224.77 279.768 1231.85 284.353 1240.02 287.542C1248.19 290.731 1257.16 292.326 1266.93 292.326C1277.3 292.326 1286.86 290.333 1295.63 286.346C1304.41 282.16 1312.38 275.881 1319.55 267.509L1350.65 296.213C1340.68 308.372 1328.33 317.641 1313.57 324.02C1299.02 330.399 1282.58 333.588 1264.24 333.588Z" fill="black"/></svg></div>
+              <div class="nav-links">
+                <a class="nav-link" href="#">Производители</a>
+                <a class="nav-link" href="#">Продукция</a>
+                <a class="nav-link" href="#">Отзывы</a>
+                <a class="nav-link" href="#">Контакты</a>
+              </div>
+              <a class="btn btn-phone" href="#" style="font-size:12px; padding:10px 20px; flex-shrink:0">+7 (4012) 99 40 40</a>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="component-name">Header / Navigation</div>
+            <div class="component-desc">Sticky, белый фон, логотип + навигация + CTA-телефон (pill-кнопка)</div>
+          </div>
+        </div>
+
+        <!-- Two-column row: Stats + Contact bar -->
+        <div class="components-two-col">
+
+          <!-- Stats -->
+          <div class="component-card">
+            <div class="component-preview">
+              <div class="stats-row">
+                <div class="stat-demo">
+                  <div class="stat-number">20 000</div>
+                  <div class="stat-label">м&sup2; на складе</div>
+                </div>
+                <div class="stat-demo">
+                  <div class="stat-number">50</div>
+                  <div class="stat-label">лет гарантия</div>
+                </div>
+                <div class="stat-demo">
+                  <div class="stat-number">300+</div>
+                  <div class="stat-label">отзывов</div>
+                </div>
+              </div>
+            </div>
+            <div class="component-info">
+              <div class="component-name">Statistics</div>
+              <div class="component-desc">Крупные числа (оранжевый, italic) + подписи (uppercase)</div>
+            </div>
+          </div>
+
+          <!-- Contact bar -->
+          <div class="component-card">
+            <div class="component-preview" style="padding:24px">
+              <div class="contact-bar-demo">
+                <div class="contact-card">
+                  <div class="contact-icon">&#9742;</div>
+                  +7 (4012)<br>99 40 40
+                </div>
+                <div class="contact-card accent">
+                  <div class="contact-icon">&#9993;</div>
+                  Рассчитать<br>стоимость
+                </div>
+                <div class="contact-card">
+                  <div class="contact-icon">&#9906;</div>
+                  п. Большое<br>Исаково
+                </div>
+              </div>
+            </div>
+            <div class="component-info">
+              <div class="component-name">Contact Bar</div>
+              <div class="component-desc">3 карточки: серый / оранжевый / серый</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two-column row: FAQ + Table -->
+        <div class="components-two-col">
+
+          <!-- FAQ -->
+          <div class="component-card">
+            <div class="component-preview" style="padding:24px 28px; background:var(--gray-100); align-items:start">
+              <div class="faq-demo">
+                <div class="faq-item">Правила программы лояльности <span class="faq-icon">+</span></div>
+                <div class="faq-item">Как подключиться к программе? <span class="faq-icon">+</span></div>
+                <div class="faq-item" style="border-bottom:none">Где воспользоваться скидкой? <span class="faq-icon">+</span></div>
+              </div>
+            </div>
+            <div class="component-info">
+              <div class="component-name">FAQ Accordion</div>
+              <div class="component-desc">Серый фон, разделители, иконка &laquo;+&raquo;</div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="component-card">
+            <div class="component-preview" style="padding:20px 24px; align-items:start">
+              <table class="table-demo">
+                <tr>
+                  <th>Характеристика</th>
+                  <th>Базовый</th>
+                  <th>Стандарт+</th>
+                  <th>Премиум</th>
+                </tr>
+                <tr>
+                  <td>Гарантия</td>
+                  <td>20 лет</td>
+                  <td>30 лет</td>
+                  <td>50 лет</td>
+                </tr>
+                <tr>
+                  <td>Толщина</td>
+                  <td>0,45&ndash;0,5</td>
+                  <td>0,45 мм</td>
+                  <td>0,5 мм</td>
+                </tr>
+                <tr>
+                  <td>Страна</td>
+                  <td>Россия</td>
+                  <td>Азия + РФ</td>
+                  <td>Европа</td>
+                </tr>
+              </table>
+            </div>
+            <div class="component-info">
+              <div class="component-name">Comparison Table</div>
+              <div class="component-desc">Чередующиеся строки (белый / gray-100), без бордеров</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 9. GRID & BREAKPOINTS (Tailwind) -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">09 / Layout</div>
+      <div class="section-subtitle">Сетка и брейкпоинты (Tailwind CSS)</div>
+
+      <!-- Breakpoints table -->
+      <div class="color-group-title" style="margin-bottom:16px">Брейкпоинты</div>
+      <table class="breakpoints-table">
+        <tr>
+          <th>Prefix</th>
+          <th>Min-width</th>
+          <th>Container max-width</th>
+          <th>Назначение</th>
+        </tr>
+        <tr>
+          <td class="bp-name">sm</td>
+          <td class="bp-value">640px</td>
+          <td class="bp-value">640px</td>
+          <td>Мобильные (landscape)</td>
+        </tr>
+        <tr>
+          <td class="bp-name">md</td>
+          <td class="bp-value">768px</td>
+          <td class="bp-value">768px</td>
+          <td>Планшеты</td>
+        </tr>
+        <tr>
+          <td class="bp-name">lg</td>
+          <td class="bp-value">1024px</td>
+          <td class="bp-value">1024px</td>
+          <td>Ноутбуки</td>
+        </tr>
+        <tr>
+          <td class="bp-name">xl</td>
+          <td class="bp-value">1280px</td>
+          <td class="bp-value">1280px</td>
+          <td>Десктопы</td>
+        </tr>
+        <tr>
+          <td class="bp-name">2xl</td>
+          <td class="bp-value">1536px</td>
+          <td class="bp-value">1536px</td>
+          <td>Широкие экраны</td>
+        </tr>
+      </table>
+
+      <!-- 12-column grid demo -->
+      <div class="grid-demo">
+        <div class="color-group-title" style="margin-bottom:16px">12-колоночная сетка</div>
+
+        <div class="grid-label">12 &times; 1 col</div>
+        <div class="grid-12">
+          <div class="grid-cell">1</div>
+          <div class="grid-cell">2</div>
+          <div class="grid-cell">3</div>
+          <div class="grid-cell">4</div>
+          <div class="grid-cell">5</div>
+          <div class="grid-cell">6</div>
+          <div class="grid-cell">7</div>
+          <div class="grid-cell">8</div>
+          <div class="grid-cell">9</div>
+          <div class="grid-cell">10</div>
+          <div class="grid-cell">11</div>
+          <div class="grid-cell">12</div>
+        </div>
+
+        <div class="grid-label">col-span-6 + col-span-6</div>
+        <div class="grid-row">
+          <div class="grid-cell grid-span" style="grid-column: span 6">6</div>
+          <div class="grid-cell grid-span" style="grid-column: span 6">6</div>
+        </div>
+
+        <div class="grid-label">col-span-4 + col-span-4 + col-span-4</div>
+        <div class="grid-row">
+          <div class="grid-cell grid-span" style="grid-column: span 4">4</div>
+          <div class="grid-cell grid-span" style="grid-column: span 4">4</div>
+          <div class="grid-cell grid-span" style="grid-column: span 4">4</div>
+        </div>
+
+        <div class="grid-label">col-span-3 &times; 4</div>
+        <div class="grid-row">
+          <div class="grid-cell grid-span" style="grid-column: span 3">3</div>
+          <div class="grid-cell grid-span" style="grid-column: span 3">3</div>
+          <div class="grid-cell grid-span" style="grid-column: span 3">3</div>
+          <div class="grid-cell grid-span" style="grid-column: span 3">3</div>
+        </div>
+
+        <div class="grid-label">col-span-8 + col-span-4 (контент + сайдбар)</div>
+        <div class="grid-row">
+          <div class="grid-cell grid-span" style="grid-column: span 8">8</div>
+          <div class="grid-cell" style="grid-column: span 4; background:var(--gray-200); border-color:var(--gray-300); color:var(--text-secondary)">4</div>
+        </div>
+
+        <div class="grid-label">col-span-3 + col-span-9 (сайдбар + контент)</div>
+        <div class="grid-row">
+          <div class="grid-cell" style="grid-column: span 3; background:var(--gray-200); border-color:var(--gray-300); color:var(--text-secondary)">3</div>
+          <div class="grid-cell grid-span" style="grid-column: span 9">9</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- 10. TRANSITIONS -->
+  <!-- ============================================================ -->
+  <section>
+    <div class="container">
+      <div class="section-title">10 / Motion</div>
+      <div class="section-subtitle">Анимации и переходы</div>
+
+      <div class="transition-demo">
+        <div class="transition-box">hover me</div>
+        <div class="transition-note">
+          <strong>--transition:</strong> 0.3s ease<br><br>
+          Единый easing для всех интерактивных элементов: кнопки, ссылки, карточки, инпуты. Плавный, не агрессивный.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding:48px 0; text-align:center; color:var(--text-muted); font-size:13px; border-top:1px solid var(--gray-200)">
+    <div class="container">
+      EBIS Design Tokens &mdash; Visual Guide &mdash; modulmetall.ru &mdash; 2026
+    </div>
+  </footer>
+
+</body>
+</html>
