@@ -69,8 +69,11 @@ if (form) {
       if (!res.ok) throw new Error('Telegram API error');
 
       localStorage.removeItem('mm_utm');
+      if (typeof window.ym === 'function') {
+        window.ym(108377413, 'reachGoal', 'lead_form_submit');
+      }
       form.innerHTML =
-        '<p class="text-center type-body text-primary font-semibold py-8">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>';
+        '<p class="text-center type-body text-green-600 font-semibold py-8">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>';
     } catch {
       btn.textContent = originalText;
       btn.disabled = false;
