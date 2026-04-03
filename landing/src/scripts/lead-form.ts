@@ -5,16 +5,10 @@
  * Submissions are delivered via email through web3forms.com.
  */
 
-const WEB3FORMS_KEY = 'ea2fcc2f-d26f-47b3-879a-f2f317c7a6bb';
+import { WEB3FORMS_KEY, YM_ID, PHONE_MIN_DIGITS, PHONE_MAX_DIGITS } from '../data/constants';
+import { readUtm, clearUtm } from './utm';
 
-// UTM: prefer current URL query string, fall back to localStorage
-const currentQs = window.location.search;
-const saved: { path?: string; search?: string } | null = JSON.parse(
-  localStorage.getItem('mm_utm') || 'null',
-);
-const utmSearch = currentQs.length > 1 ? currentQs : (saved?.search || '');
-const utmLandingPath = saved?.path || window.location.pathname;
-const urlParams = new URLSearchParams(utmSearch);
+const utm = readUtm();
 
 // --- Validation helpers ---
 function showFieldError(field: HTMLElement, message: string) {
@@ -40,8 +34,8 @@ function validatePhone(value: string): string | null {
   if (!trimmed) return 'Введите номер телефона';
   if (/[^0-9\s()\-+.]/.test(trimmed)) return 'Телефон содержит недопустимые символы';
   const digits = trimmed.replace(/\D/g, '');
-  if (digits.length < 6) return 'Номер слишком короткий';
-  if (digits.length > 15) return 'Номер слишком длинный';
+  if (digits.length < PHONE_MIN_DIGITS) return 'Номер слишком короткий';
+  if (digits.length > PHONE_MAX_DIGITS) return 'Номер слишком длинный';
   return null;
 }
 
@@ -95,11 +89,11 @@ if (form) {
     if (comment) payload.comment = comment;
     payload.landing_page = window.location.pathname;
 
-    for (const [key, raw] of urlParams) {
+    for (const [key, raw] of utm.params) {
       if (!isResolved(raw)) continue;
       payload[key] = raw;
     }
-    if (utmSearch) payload.landing_url = utmLandingPath + utmSearch;
+    if (utm.search) payload.landing_url = utm.landingPath + utm.search;
 
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -110,9 +104,9 @@ if (form) {
       const data = await res.json();
       if (!data.success) throw new Error(data.message || 'Web3Forms error');
 
-      localStorage.removeItem('mm_utm');
+      clearUtm();
       if (typeof window.ym === 'function') {
-        window.ym(108377413, 'reachGoal', 'lead_form_submit');
+        window.ym(YM_ID, 'reachGoal', 'lead_form_submit');
       }
       form.innerHTML =
         '<p class="text-center type-body text-green-600 font-semibold py-8">✓ Заявка отправлена! Мы&nbsp;свяжемся с&nbsp;вами в&nbsp;ближайшее время.</p>';
@@ -120,11 +114,11 @@ if (form) {
       btn.textContent = originalText;
       btn.disabled = false;
 
-      if (!form.querySelector('.lead-error')) {
-        const err = document.createElement('p');
-        err.className = 'lead-error text-red-600 type-caption text-center mt-2';
-        err.textContent = `Не\u00A0удалось отправить. Позвоните нам: +7\u00A0(4012) 99\u00A040\u00A040`;
-        form.appendChild(err);
+      const errorEl = form.querySelector<HTMLElement>('#lead-error');
+      if (errorEl) {
+        const phone = form.dataset.phone || '+7 (4012) 99 40 40';
+        errorEl.textContent = `Не\u00A0удалось отправить. Позвоните нам: ${phone}`;
+        errorEl.classList.remove('hidden');
       }
     }
   });
