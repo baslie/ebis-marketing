@@ -3,7 +3,7 @@ import { site } from "../data/site";
 ---
 
 <section class="py-4 md:py-6">
-  <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 lg:gap-8 items-center">
+  <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 lg:gap-8 items-stretch">
     <!-- Boomstream vertical video -->
     <div class="w-full max-w-[360px] mx-auto lg:mx-0">
       <div class="aspect-[9/16] rounded-lg overflow-hidden bg-gray-200">
@@ -18,16 +18,17 @@ import { site } from "../data/site";
     </div>
 
     <!-- Lead form card -->
-    <div class="border-[5px] border-primary rounded-lg p-6">
+    <div class="border-[5px] border-primary rounded-lg p-6 h-full flex flex-col">
       <h2 class="type-h2 text-text-primary mb-1 text-center">
         Рассчитайте стоимость вашей крыши за&nbsp;15&nbsp;минут
       </h2>
       <p class="type-caption text-text-secondary mb-3 text-center">
         Оставьте контакты&nbsp;&mdash; менеджер позвонит, уточнит параметры и&nbsp;зафиксирует цену на&nbsp;<span class="underline decoration-current underline-offset-2" set:html={site.promo.dateLabelHtml} />.
       </p>
-      <form action="#" method="POST" class="space-y-3">
+      <form id="lead-form" action="#" method="POST" class="space-y-3 flex-1 flex flex-col">
         <input
           type="text"
+          id="lead-name"
           name="name"
           placeholder="Имя"
           aria-label="Имя"
@@ -35,6 +36,7 @@ import { site } from "../data/site";
         />
         <input
           type="tel"
+          id="lead-phone"
           name="phone"
           placeholder="Телефон"
           aria-label="Телефон"
@@ -42,11 +44,12 @@ import { site } from "../data/site";
           class="form-field h-[44px]"
         />
         <textarea
+          id="lead-comment"
           name="comment"
           placeholder="Комментарий"
           aria-label="Комментарий"
           rows="2"
-          class="form-field min-h-[80px] py-3 resize-y"
+          class="form-field min-h-[80px] py-3 resize-y flex-1"
         ></textarea>
         <label class="flex items-start gap-2 cursor-pointer type-caption text-text-secondary leading-snug">
           <input
@@ -61,15 +64,20 @@ import { site } from "../data/site";
             пользователя сайта и&nbsp;даю согласие на&nbsp;обработку моих персональных данных на&nbsp;указанных в&nbsp;нем порядке и&nbsp;условиях.
           </span>
         </label>
-        <div class="flex justify-center">
+        <div class="flex flex-col items-center mt-auto">
           <button
             type="submit"
-            class="h-[48px] px-12 bg-primary text-white type-body font-semibold rounded-btn-lg hover:bg-primary-hover transition-colors duration-300 cursor-pointer"
+            class="lead-submit h-[48px] px-12 bg-primary text-white type-body font-semibold rounded-btn-lg hover:bg-primary-hover transition-colors duration-300 cursor-pointer"
           >
             Получить расчёт
           </button>
+          <p class="mt-2 type-caption text-primary font-semibold">
+            Экономия до&nbsp;52&nbsp;500&nbsp;₽ с&nbsp;одной крыши
+          </p>
         </div>
       </form>
     </div>
   </div>
 </section>
+
+<script src="../scripts/lead-form.ts"></script>

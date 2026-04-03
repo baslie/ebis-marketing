@@ -28,5 +28,16 @@ const {
   </head>
   <body class="min-h-screen bg-white flex flex-col">
     <slot />
+    <script is:inline>
+      (function () {
+        var qs = window.location.search;
+        if (qs.length > 1) {
+          localStorage.setItem('mm_utm', JSON.stringify({
+            path: window.location.pathname,
+            search: qs
+          }));
+        }
+      })();
+    </script>
   </body>
 </html>
