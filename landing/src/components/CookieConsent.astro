@@ -1,0 +1,33 @@
+<div
+  id="cookie-consent"
+  class="fixed bottom-4 left-4 z-50 max-w-xs w-full bg-white rounded-lg shadow-lg border border-gray-200 p-4 type-caption text-text-secondary"
+>
+  <p class="mb-2 text-text-primary font-medium">Этот сайт использует cookies.</p>
+  <p class="mb-3">
+    <a
+      href="/privacy"
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+      class="text-primary hover:text-primary-hover underline underline-offset-2 transition-colors"
+    >→ Политика конфиденциальности</a>
+  </p>
+  <button
+    id="cookie-accept"
+    class="px-5 py-1.5 bg-primary text-white text-sm font-semibold rounded-btn hover:bg-primary-hover transition-colors cursor-pointer"
+  >Хорошо</button>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('cookie-consent');
+    if (!el) return;
+    if (localStorage.getItem('mm_cookie_consent')) {
+      el.style.display = 'none';
+      return;
+    }
+    document.getElementById('cookie-accept').addEventListener('click', function () {
+      localStorage.setItem('mm_cookie_consent', '1');
+      el.style.display = 'none';
+    });
+  })();
+</script>

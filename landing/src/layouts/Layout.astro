@@ -2,6 +2,7 @@
 import "@fontsource-variable/montserrat";
 import "../styles/global.css";
 import { site } from "../data/site";
+import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title: string;
@@ -28,6 +29,7 @@ const {
   </head>
   <body class="min-h-screen bg-white flex flex-col">
     <slot />
+    <CookieConsent />
     <script is:inline>
       (function () {
         var qs = window.location.search;
